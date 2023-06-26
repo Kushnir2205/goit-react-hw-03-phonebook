@@ -3,6 +3,9 @@ import { ContactForm } from '../ContactForm/ContactForm.jsx';
 import { ContactList } from '../ContactList/ContactList.jsx';
 import styles from './App.module.css';
 import { Filter } from 'components/Filter/Filter.jsx';
+// import { save, load } from 'utils/localstorage.js';
+
+// const initialState = [];
 
 class App extends Component {
   state = {
@@ -14,6 +17,35 @@ class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts) ?? [];
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  // componentDidUpdate = (_, prevState) => {
+  //   const { contacts } = this.state;
+  //   if (contacts !== prevState.contacts) {
+  //     save(contacts, 'contacts');
+  //   }
+  // };
+
+  // componentDidMount = () => {
+  //   const contacts = load('contacts') ?? initialState;
+
+  //   this.setState({ contacts: contacts });
+  // };
+
   handleFilter = e => {
     this.setState({ filter: e.target.value });
   };
@@ -62,5 +94,4 @@ class App extends Component {
   }
 }
 
-//  const ....
 export default App;
