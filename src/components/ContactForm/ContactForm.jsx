@@ -14,7 +14,7 @@ export class ContactForm extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    // const addContact = { name: this.state.name, number: this.state.number,};
+
     const { name, number } = this.state;
     this.props.onSubmitData({ name, number, id: crypto.randomUUID() });
     this.resetForm();

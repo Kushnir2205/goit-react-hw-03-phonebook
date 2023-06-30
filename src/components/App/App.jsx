@@ -3,9 +3,6 @@ import { ContactForm } from '../ContactForm/ContactForm.jsx';
 import { ContactList } from '../ContactList/ContactList.jsx';
 import styles from './App.module.css';
 import { Filter } from 'components/Filter/Filter.jsx';
-// import { save, load } from 'utils/localstorage.js';
-
-// const initialState = [];
 
 class App extends Component {
   state = {
@@ -32,20 +29,6 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-
-  // componentDidUpdate = (_, prevState) => {
-  //   const { contacts } = this.state;
-  //   if (contacts !== prevState.contacts) {
-  //     save(contacts, 'contacts');
-  //   }
-  // };
-
-  // componentDidMount = () => {
-  //   const contacts = load('contacts') ?? initialState;
-
-  //   this.setState({ contacts: contacts });
-  // };
-
   handleFilter = e => {
     this.setState({ filter: e.target.value });
   };
